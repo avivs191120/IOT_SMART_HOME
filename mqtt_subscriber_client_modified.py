@@ -33,9 +33,9 @@ client.on_message=on_message
     
 print("Connecting to broker ",broker)
 port=1883
-client.connect(broker,port)     #connect to broker
+client.connect(broker, port, keepalive=90)    #connect to broker
 
-sub_topic= 'IOT/SMART_HOME/7235_9203/sensor1'
+sub_topic = "IOT/SMART_HOME/7235_9203/sensor1"
 
 
 # Next 2 loops will publishing 40 messages to one topic(house) and 2 subtopics(sensor_0 and sensor_1)

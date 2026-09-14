@@ -32,12 +32,20 @@ client.on_message=on_message
     
 print("Connecting to broker ",broker)
 port=1883
-client.connect(broker,port)     #connect to broker
+
+client.will_set(
+    "IOT/SMART_HOME/7235_9203/status",
+    payload="Client disconnected unexpectedly",
+    qos=1,
+    retain=True
+)
+
+client.connect(broker, port, keepalive=90)    #connect to broker
 
 pub_topic = "IOT/SMART_HOME/7235_9203/sensor1"
 
 # Next 2 loops will publishing 40 messages to one topic(house) and 2 subtopics(sensor_0 and sensor_1)
-client.publish(pub_topic, "Test 3 message", qos=1, retain=False)
+client.publish(pub_topic, "Final test message", qos=1, retain=False)
 # for j in range(2):
 #         for i in range(20):
 #              client.publish("matzi/house/sensor_"+str(j),"my  "+str(i)+" message")
